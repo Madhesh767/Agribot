@@ -23,8 +23,8 @@ ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "password123"
 
 # ✅ Hugging Face API details (FREE model - no license approval needed)
-API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-large"
-API_KEY = "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"  # 🔥 Replace with your Hugging Face token
+API_URL = ""
+API_KEY = ""  # 🔥 Replace with your Hugging Face token
 
 
 # ✅ Load the crop prediction model safely

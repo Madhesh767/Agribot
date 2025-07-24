@@ -3,8 +3,8 @@ import json
 import os
 
 # Hugging Face API details for Mistral-7B-Instruct-v0.3
-API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-large"
-API_KEY = "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"  # Replace with your API key
+API_URL = ""
+API_KEY = ""  # Replace with your API key
 
 # List to store messages
 messages = []
