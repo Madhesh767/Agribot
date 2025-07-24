@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="text-success">Crop Animation Lah</h2>
+    <p>Check out these cool animated farming videos sia—click to watch!</p>
+
+    <!-- Grid of video cards -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for video in videos %}
+        <div class="col">
+            <div class="card h-100 shadow-sm" onclick="openVideo('{{ video.id }}')">
+                <img src="https://img.youtube.com/vi/{{ video.id }}/0.jpg" class="card-img-top" alt="Thumbnail">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Bootstrap Modal (larger size) -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-md-down modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Playing Video Lah</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="/" class="btn btn-outline-success mt-3">Back Home Lah</a>
+</div>
+
+<!-- Custom CSS to make the modal even larger -->
+<style>
+    .modal-xl {
+        max-width: 90vw !important; /* 90% of viewport width */
+        max-height: 90vh !important; /* 90% of viewport height */
+    }
+    .modal-content {
+        height: 90vh; /* Ensure the modal content takes full height */
+    }
+    .modal-body {
+        padding: 0; /* Remove padding for a full video fit */
+    }
+    .ratio-16x9 {
+        height: 100%; /* Make the video fill the modal */
+    }
+    #videoFrame {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<!-- JavaScript for video playback -->
+<script>
+function openVideo(videoId) {
+    let videoFrame = document.getElementById("videoFrame");
+    videoFrame.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1"; // Auto-play enabled
+    let modal = new bootstrap.Modal(document.getElementById("videoModal"));
+    modal.show();
+}
+
+// Stop video when modal is closed
+document.getElementById("videoModal").addEventListener("hidden.bs.modal", function () {
+    document.getElementById("videoFrame").src = "";
+});
+</script>
+{% endblock %}
