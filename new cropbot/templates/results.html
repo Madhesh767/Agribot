@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="text-success">Results</h2>
+    <p><strong>Recommended Crop: {{ crop }}</strong></p>
+    <h3>Recommendations</h3>
+    {% for rec in recommendations %}
+        <div class="alert alert-info">{{ rec }}</div>
+    {% endfor %}
+    <a href="/" class="btn btn-outline-success mt-3">Back </a>
+</div>
+{% endblock %}

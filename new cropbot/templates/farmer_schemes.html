@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow p-4">
+    <h2 class="text-success">Farmer Government Schemes</h2>
+    <form method="POST" class="mb-4">
+        <div class="mb-3">
+            <label class="form-label">Language:</label>
+            <select name="language" class="form-select" onchange="this.form.submit()">
+                <option value="en" {% if language == "en" %}selected{% endif %}>English</option>
+                <option value="kn" {% if language == "kn" %}selected{% endif %}>Kannada</option>
+                <option value="ta" {% if language == "ta" %}selected{% endif %}>Tamil</option>
+                <option value="ml" {% if language == "ml" %}selected{% endif %}>Malayalam</option>
+            </select>
+        </div>
+    </form>
+
+    <h3>Schemes List</h3>
+    {% for scheme in schemes %}
+        <div class="alert alert-info">
+            <strong>{{ scheme.name }}</strong><br>{{ scheme.description }}
+        </div>
+    {% endfor %}
+
+    {% if session.logged_in %}
+        <h3>Admin Dashboard (Madam Access Lah)</h3>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Scheme Name:</label>
+                <input type="text" name="scheme_name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Scheme Description:</label>
+                <textarea name="scheme_desc" class="form-control" required></textarea>
+            </div>
+            <button type="submit" name="admin_add" class="btn btn-success">Add Scheme </button>
+        </form>
+    {% else %}
+        <p class="text-muted">Admin access needed to add schemes lah. <a href="/login">Login here</a>.</p>
+    {% endif %}
+    <a href="/" class="btn btn-outline-success mt-3">Back Home </a>
+</div>
+{% endblock %}

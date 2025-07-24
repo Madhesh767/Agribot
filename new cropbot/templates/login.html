@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow p-4" style="max-width: 400px; margin: 0 auto;">
+    <h2 class="text-success text-center">Admin Login Lah</h2>
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Username:</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password:</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Login Lah</button>
+    </form>
+</div>
+{% endblock %}
