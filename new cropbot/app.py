@@ -1,12 +1,12 @@
-from flask import Flask, request, render_template, jsonify, session, redirect, url_for
+from flask import Flask, request, render_template, jsonify, session, redirect, url_for # pyright: ignore[reportMissingImports]
 import pickle
-import numpy as np
-from translate import Translator
-import requests
+import numpy as np # pyright: ignore[reportMissingImports]
+from translate import Translator # pyright: ignore[reportMissingImports]
+import requests # pyright: ignore[reportMissingModuleSource]
 import json
 import os
 import warnings
-from dotenv import load_dotenv
+from dotenv import load_dotenv # pyright: ignore[reportMissingImports]
 import os
 
 load_dotenv()
