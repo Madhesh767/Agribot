@@ -1,0 +1,27 @@
+[build]
+  base = "new cropbot"
+  command = "echo 'Static build complete'"
+  publish = "static"
+
+[functions]
+  included_files = ["models/**", "schemes.json"]
+
+[[redirects]]
+  from = "/chat"
+  to = "/chat.html"
+  status = 200
+
+[[redirects]]
+  from = "/crop_animation"
+  to = "/crop_animation.html"
+  status = 200
+
+[[redirects]]
+  from = "/farmer_schemes"
+  to = "/farmer_schemes.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
