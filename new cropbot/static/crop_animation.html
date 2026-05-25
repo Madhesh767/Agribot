@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmBot - Crop Animation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .video-card { cursor: pointer; transition: transform .2s; }
+    .video-card:hover { transform: scale(1.03); }
+    .modal-xl { max-width: 90vw !important; }
+    .modal-content { height: 90vh; }
+    .modal-body { padding: 0; }
+    #videoFrame { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <header class="bg-success text-white text-center py-3">
+    <h1>FarmBot</h1>
+    <p>Your Farming Companion</p>
+    <nav>
+      <a href="/" class="text-white mx-2">Home</a> |
+      <a href="/chat" class="text-white mx-2">Chatbot</a> |
+      <a href="/crop_animation" class="text-white mx-2">Crop Animation</a> |
+      <a href="/farmer_schemes" class="text-white mx-2">Farmer Schemes</a>
+    </nav>
+  </header>
+  <main class="container my-5">
+    <div class="card shadow p-4">
+      <h2 class="text-success">Crop Animation</h2>
+      <p>Check out these cool farming videos — click to watch!</p>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="video-grid"></div>
+      <a href="/" class="btn btn-outline-success mt-3">Back Home</a>
+    </div>
+  </main>
+
+  <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-md-down modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Now Playing</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="ratio ratio-16x9">
+            <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-white text-center py-3 fixed-bottom">
+    <p>© 2025 FarmBot | Built with ❤️ by MADD</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    const videos = [
+      { title: "The Farming Cycle", id: "Dip81m1rRrM" },
+      { title: "How Plants Grow", id: "DwDBVfsrQXo" },
+      { title: "Life of a Farmer", id: "JDNCm-MQRsE" },
+      { title: "Water Cycle in Farming", id: "j1HIClkuLnw" },
+      { title: "Photosynthesis Explained", id: "oKzwgJMy0sQ" }
+    ];
+
+    const grid = document.getElementById('video-grid');
+    videos.forEach(v => {
+      grid.innerHTML += `
+        <div class="col">
+          <div class="card h-100 shadow-sm video-card" onclick="openVideo('${v.id}')">
+            <img src="https://img.youtube.com/vi/${v.id}/0.jpg" class="card-img-top" alt="${v.title}">
+            <div class="card-body text-center"><h5 class="card-title">${v.title}</h5></div>
+          </div>
+        </div>`;
+    });
+
+    function openVideo(id) {
+      document.getElementById('videoFrame').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+      new bootstrap.Modal(document.getElementById('videoModal')).show();
+    }
+
+    document.getElementById('videoModal').addEventListener('hidden.bs.modal', () => {
+      document.getElementById('videoFrame').src = '';
+    });
+  </script>
+</body>
+</html>
