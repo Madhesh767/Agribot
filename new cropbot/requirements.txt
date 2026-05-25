@@ -1,7 +1,7 @@
-flask==2.3.3
+flask>=2.3
 gunicorn
-numpy==1.26.4
-pickle-mixin==1.0.2
-translate==3.6.1
+numpy
+pickle-mixin
+translate
 scikit-learn
-requests==2.31.0
+requests
