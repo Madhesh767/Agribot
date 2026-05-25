@@ -6,11 +6,8 @@ import requests # pyright: ignore[reportMissingModuleSource]
 import json
 import os
 import warnings
-from dotenv import load_dotenv # pyright: ignore[reportMissingImports]
-import os
 
-load_dotenv()
-API_KEY = os.getenv("HUGGINGFACE_API_KEY")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ✅ Suppress scikit-learn version mismatch warnings (safe for testing)
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -22,14 +19,14 @@ app.secret_key = os.getenv("SECRET_KEY", "dev_secret_lah")  # ✅ Use env variab
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "password123"
 
-# ✅ Hugging Face API details (FREE model - no license approval needed)
-API_URL = ""
-API_KEY = ""  # 🔥 Replace with your Hugging Face token
+# ✅ Hugging Face API details - set HUGGINGFACE_API_URL and HUGGINGFACE_API_KEY in Vercel env vars
+API_URL = os.getenv("HUGGINGFACE_API_URL", "")
+API_KEY = os.getenv("HUGGINGFACE_API_KEY", "")
 
 
 # ✅ Load the crop prediction model safely
 def load_model():
-    model_path = os.path.join(os.getcwd(), "models", "crop_model.pkl")
+    model_path = os.path.join(BASE_DIR, "models", "crop_model.pkl")
     if not os.path.exists(model_path):
         print(f"❌ Error: Crop model file not found at {model_path}. Run train.py first lah.")
         return None
@@ -120,8 +117,11 @@ def load_schemes():
 
 
 def save_schemes(schemes):
-    with open("schemes.json", "w") as f:
-        json.dump(schemes, f, indent=4)
+    try:
+        with open("schemes.json", "w") as f:
+            json.dump(schemes, f, indent=4)
+    except OSError as e:
+        print(f"⚠ Cannot save schemes (read-only filesystem): {e}")
 
 
 # ✅ LOGIN ROUTE
